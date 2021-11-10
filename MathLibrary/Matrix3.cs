@@ -108,8 +108,8 @@ namespace MathLibrary
         /// <param name="radians">The result of the rotation</param>
         public static Matrix3 CreateRotation(float radians)
         {
-            Matrix3 RotatedMatrix3 = new Matrix3((float)Math.Cos(radians), (float)-Math.Sin(radians), Identity.M02,
-                                                 (float)Math.Sin(radians), (float)Math.Cos(radians), Identity.M12,
+            Matrix3 RotatedMatrix3 = new Matrix3((float)Math.Cos(radians), (float)Math.Sin(radians), Identity.M02,
+                                                 -(float)Math.Sin(radians), (float)Math.Cos(radians), Identity.M12,
                                                  Identity.M20, Identity.M21, Identity.M22);
             return RotatedMatrix3;
         }

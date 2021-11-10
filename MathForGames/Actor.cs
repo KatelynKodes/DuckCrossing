@@ -95,7 +95,7 @@ namespace MathForGames
             set { _sprite = value; }
         }
 
-        public string GetName
+        public string Name
         {
             get { return _name; }
         }
@@ -119,6 +119,7 @@ namespace MathForGames
 
         public Actor(float x, float y, string name = "Actor", string path = "") :
             this(new Vector2 {X = x, Y = y}, name, path){ }
+
 
         public Actor(Vector2 position, string name = "Actor", string path = "")
         {

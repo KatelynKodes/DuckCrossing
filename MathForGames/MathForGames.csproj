@@ -7,24 +7,7 @@
 
   <ItemGroup>
     <None Remove="enemy.png" />
-    <None Remove="Images\Planet.png" />
-    <None Remove="Images\Sun.png" />
     <None Remove="player.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Images\enemy.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Planet.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\player.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Sun.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +16,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MathLibrary\MathLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>

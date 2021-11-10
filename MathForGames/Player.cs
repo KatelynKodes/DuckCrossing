@@ -11,7 +11,7 @@ namespace MathForGames
         private Vector2 _velocity;
         private float _speed;
 
-        public float GetSpeed
+        public float Speed
         {
             get { return _speed; }
             set { _speed = value; }
@@ -57,9 +57,9 @@ namespace MathForGames
         /// <param name="collider"> The actor the player collided with </param>
         public override void OnCollision(Actor collider)
         {
-            if (collider is Enemy)
+            if (collider is Collectable)
             {
-                Engine.CloseApplication();
+                AddChild(collider);
             }
         }
 
