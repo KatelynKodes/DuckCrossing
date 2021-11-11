@@ -78,8 +78,23 @@ namespace MathForGames
             Duckling4.Collider = new CircleCollider(20, Duckling4);
 
             //The cars
-            Car car1 = new Car(30, 10, 60f, new Vector2(30, 750), "car1", "");
+            Car car1 = new Car(150, 10, 60f, new Vector2(150, 750), "car1", "");
             car1.Collider = new AABBCollider(50, 115, car1);
+
+            Car car2 = new Car(280, 750, 60f, new Vector2(280, 10), "car2", "");
+            car2.Collider = new AABBCollider(50, 115, car2);
+
+            Car car3 = new Car(550, 10, 60f, new Vector2(550, 750), "car3", "");
+            car3.Collider = new AABBCollider(50, 115, car3);
+
+            Car car4 = new Car(680, 750, 60f, new Vector2(680, 10), "car4", "");
+            car4.Collider = new AABBCollider(50, 115, car4);
+
+
+            //UI Text
+            UIText Instructions = new UIText(0, 0, "Instructions Text", "", 
+                "Use the 'W, A, S, D' keys to move, run into ducklings to catch them.", 800, 70, 20);
+            Instructions.Collider = new AABBCollider(Instructions.Width, Instructions.Height, Instructions);
 
             //Adding actors to the scene
             CrossingScene.AddActor(MotherDuck);
@@ -88,6 +103,10 @@ namespace MathForGames
             CrossingScene.AddActor(Duckling3);
             CrossingScene.AddActor(Duckling4);
             CrossingScene.AddActor(car1);
+            CrossingScene.AddActor(car2);
+            CrossingScene.AddActor(car3);
+            CrossingScene.AddActor(car4);
+            CrossingScene.AddUIElement(Instructions);
 
             _scenes = new Scene[] { CrossingScene, WinningScene, LosingScene };
 
@@ -101,7 +120,8 @@ namespace MathForGames
         private void Update(float deltaTime)
         {
             _scenes[_currentSceneIndex].Update(deltaTime);
-            
+            _scenes[_currentSceneIndex].UpdateUI(deltaTime);
+
 
             while (Console.KeyAvailable)
             {
@@ -126,7 +146,7 @@ namespace MathForGames
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.DARKGREEN);
-            Raylib.DrawRectangle(0, 0, 800, 70, Color.BLACK);
+            //Raylib.DrawRectangle(0, 0, 800, 70, Color.BLACK);
 
             //Street
             Raylib.DrawRectangle(100, 70, 100, 900, Color.GRAY);
@@ -138,6 +158,7 @@ namespace MathForGames
 
             //Adds all actor icons to buffer
             _scenes[_currentSceneIndex].Draw();
+            _scenes[_currentSceneIndex].DrawUI();
 
             Raylib.EndDrawing();
         }

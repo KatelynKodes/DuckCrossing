@@ -26,39 +26,26 @@ namespace MathForGames
             _speed = speed;
         }
 
-        public void Update(float DeltaTime)
+        public override void Update(float DeltaTime)
         {
             Vector2 moveDir = new Vector2();
 
-            if (!_reachedEnd)
+            if (LocalPosition == _endingPos)
             {
                 moveDir = (_endingPos - LocalPosition).Normalized;
-                _velocity = moveDir * Speed * DeltaTime;
-
-                LocalPosition += _velocity;
-
-                if (LocalPosition == _endingPos)
-                {
-                    _reachedEnd = true;
-                }
             }
-            else
+            else if (LocalPosition == _startingPos)
             {
                 moveDir = (_startingPos - LocalPosition).Normalized;
-                _velocity = moveDir * Speed * DeltaTime;
-
-                LocalPosition += _velocity;
-
-                if (LocalPosition == _startingPos)
-                {
-                    _reachedEnd = false;
-                }
             }
+
+            _velocity = moveDir * Speed * DeltaTime;
+            LocalPosition += _velocity;
 
             base.Update(DeltaTime);
         }
 
-        public void Draw()
+        public override void Draw()
         {
             base.Draw();
             Collider.Draw();

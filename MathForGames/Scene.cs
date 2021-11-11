@@ -10,10 +10,12 @@ namespace MathForGames
         /// Array of actors in the scenes
         /// </summary>
         private Actor[] _actors;
+        private Actor[] _UIElements;
 
         public Scene()
         {
             _actors = new Actor[0];
+            _UIElements = new Actor[0];
         }
 
         /// <summary>
@@ -50,6 +52,21 @@ namespace MathForGames
         }
 
         /// <summary>
+        /// Updates the UI text on the screen
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        public virtual void UpdateUI(float deltaTime)
+        {
+            for (int i = 0; i < _UIElements.Length; i++)
+            {
+                if (!_UIElements[i].Started)
+                    _UIElements[i].Start();
+
+                _UIElements[i].Update(deltaTime);
+            }
+        }
+
+        /// <summary>
         /// Calls End for all the actors in the _actors array
         /// </summary>
         public virtual void End()
@@ -68,6 +85,17 @@ namespace MathForGames
             for (int i = 0; i < _actors.Length; i++)
             {
                 _actors[i].Draw();
+            }
+        }
+
+        /// <summary>
+        /// Draws the UI to the screen
+        /// </summary>
+        public virtual void DrawUI()
+        {
+            for (int i = 0; i < _UIElements.Length; i++)
+            {
+                _UIElements[i].Draw();
             }
         }
 
@@ -91,6 +119,24 @@ namespace MathForGames
 
             //makes _actors array match the template array
             _actors = NewActorArray;
+        }
+
+        /// <summary>
+        /// Adds UI element to the screen
+        /// </summary>
+        /// <param name="UIElement"> UI element to add</param>
+        public void AddUIElement(Actor UIElement)
+        {
+            Actor[] TempUIArray = new Actor[_UIElements.Length + 1];
+
+            for (int i = 0; i < _UIElements.Length; i++)
+            {
+                TempUIArray[i] = _UIElements[i];
+            }
+
+            TempUIArray[TempUIArray.Length - 1] = UIElement;
+
+            _UIElements = TempUIArray;
         }
 
         /// <summary>
