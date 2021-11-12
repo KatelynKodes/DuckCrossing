@@ -9,9 +9,8 @@ namespace MathForGames
     {
         private float _speed;
         private Vector2 _velocity;
-        private Vector2 _startingPos;
-        private Vector2 _endingPos;
-        private bool _reachedEnd;
+        private float _maxY;
+        private float _var = 0f;
 
         public float Speed
         {
@@ -19,21 +18,23 @@ namespace MathForGames
             set { _speed = value; }
         }
 
-        public Car(float x, float y, float speed, Vector2 endingPos, string name, string path) : base(x, y, name, path)
+        public Vector2 Velocity
         {
-            _startingPos = new Vector2(x, y);
-            _endingPos = endingPos;
+            get { return _velocity; }
+            set { _velocity = value; }
+        }
+
+        public Car(float x, float y, float speed, float maxY, string name, string path) : base(x, y, name, path)
+        {
+            _maxY = maxY;
             _speed = speed;
         }
 
         public override void Update(float DeltaTime)
         {
-            /* Vector2 moveDir = new Vector2();
-
-            _velocity = moveDir * Speed * DeltaTime;
-            LocalPosition += _velocity;
-
-            base.Update(DeltaTime); */
+            Vector2 Movedir = new Vector2(0, _maxY) * MathF.Cos(_var + DeltaTime);
+            Velocity = Movedir * Speed;
+            LocalPosition += Velocity * _speed;
         }
 
         public override void Draw()

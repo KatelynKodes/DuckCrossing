@@ -14,8 +14,6 @@ namespace MathForGames
         private static int _currentSceneIndex = 0;
         private static Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
-        private bool _playerDead;
-        private int _ducklingsCaught;
 
         /// <summary>
         /// Called to begin the application
@@ -59,8 +57,8 @@ namespace MathForGames
             //Create Window using raylib
             Raylib.InitWindow(800, 800, "Duck Crossing");
             Scene CrossingScene = new Scene(Color.DARKGREEN);
-            Scene WinningScene = new Scene(Color.BLACK);
-            Scene LosingScene = new Scene(Color.BLACK);
+            Scene WinningScene = new Scene(Color.GREEN);
+            Scene LosingScene = new Scene(Color.RED);
 
             //Defining the Player
             Player MotherDuck = new Player(400, 750, 50f, "Duck", "");
@@ -73,32 +71,38 @@ namespace MathForGames
             Collectable Duckling2 = new Collectable(94, 100, 40f, "Duckling2", "");
             Duckling2.Collider = new CircleCollider(20, Duckling2);
 
-            Collectable Duckling3 = new Collectable(500, 30, 40f, "Duckling3", "");
+            Collectable Duckling3 = new Collectable(500, 300, 40f, "Duckling3", "");
             Duckling3.Collider = new CircleCollider(20, Duckling3);
 
             Collectable Duckling4 = new Collectable(60, 300, 40f, "Duckling4", "");
             Duckling4.Collider = new CircleCollider(20, Duckling4);
 
             //The cars
-            Car car1 = new Car(150, 10, 60f, new Vector2(150, 750), "car1", "");
+            Car car1 = new Car(150, 10, 60f, 750, "car1", "");
             car1.Collider = new AABBCollider(50, 115, car1);
 
-            Car car2 = new Car(280, 750, 60f, new Vector2(280, 10), "car2", "");
+            Car car2 = new Car(280, 750, 60f, 10, "car2", "");
             car2.Collider = new AABBCollider(50, 115, car2);
 
-            Car car3 = new Car(550, 10, 60f, new Vector2(550, 750), "car3", "");
+            Car car3 = new Car(550, 10, 60f, 750, "car3", "");
             car3.Collider = new AABBCollider(50, 115, car3);
 
-            Car car4 = new Car(680, 750, 60f, new Vector2(680, 10), "car4", "");
+            Car car4 = new Car(680, 750, 60f, 10, "car4", "");
             car4.Collider = new AABBCollider(50, 115, car4);
 
 
             //UI Text
             UIText Instructions = new UIText(0, 0, "Instructions Text", "", 
                 "Use the 'W, A, S, D' keys to move, run into ducklings to catch them.", 800, 70, 20);
-            UIText CaughtText = new UIText(0, 40, "CaughtText", "", "Ducklings Caught: " + _ducklingsCaught, 200, 20, 20);
+            UIText CaughtText = new UIText(0, 40, "CaughtText", "", "Ducklings Caught: " + MotherDuck.CurrChildren, 200, 20, 20);
 
-            //Adding actors to the scene
+            UIText WinningMessage = new UIText(400, 400, "Winning Message", "",
+                "You Win! The ducklings are safe :) close the window to end the game", 800, 70, 50);
+            UIText LosingMessage = new UIText(400, 400, "Losing Message", "",
+                "Oh no! You died before you could grab all your ducklings :( \n Ducklings Caught: " + MotherDuck.CurrChildren  +
+                "close the window to end the game", 800, 70, 20);
+
+            //Adding actors to the crossing scene
             CrossingScene.AddActor(MotherDuck);
             CrossingScene.AddActor(Duckling1);
             CrossingScene.AddActor(Duckling2);
@@ -110,6 +114,10 @@ namespace MathForGames
             CrossingScene.AddActor(car4);
             CrossingScene.AddUIElement(Instructions);
             CrossingScene.AddUIElement(CaughtText);
+
+            //Adding UI to the Winning and Losing Screens
+            WinningScene.AddUIElement(WinningMessage);
+            LosingScene.AddUIElement(LosingMessage);
 
             _scenes = new Scene[] { CrossingScene, WinningScene, LosingScene };
 
@@ -124,7 +132,6 @@ namespace MathForGames
         {
             _scenes[_currentSceneIndex].Update(deltaTime);
             _scenes[_currentSceneIndex].UpdateUI(deltaTime);
-
 
             while (Console.KeyAvailable)
             {
@@ -148,7 +155,7 @@ namespace MathForGames
         private void Draw()
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.DARKGREEN);
+            Raylib.ClearBackground(Color.BLACK);
             //Raylib.DrawRectangle(0, 0, 800, 70, Color.BLACK);
 
             //Street
@@ -214,6 +221,11 @@ namespace MathForGames
         public static void CloseApplication()
         {
             _applicationShouldClose = true;
+        }
+
+        private void InitializeCrossingScene()
+        {
+            
         }
     }
 }

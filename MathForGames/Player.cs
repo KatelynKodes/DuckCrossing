@@ -11,6 +11,19 @@ namespace MathForGames
         private Vector2 _velocity;
         private float _speed;
         private bool _isDead;
+        private int _currChildren;
+
+        public bool IsDead
+        {
+            get { return _isDead; }
+            private set { _isDead = value; }
+        }
+
+        public int CurrChildren
+        {
+            get { return _currChildren; }
+            private set { _currChildren = value; }
+        }
 
         public float Speed
         {
@@ -18,7 +31,7 @@ namespace MathForGames
             set { _speed = value; }
         }
 
-        public Vector2 GetVelocity
+        public Vector2 Velocity
         {
             get { return _velocity; }
             set { _velocity = value; }
@@ -44,9 +57,11 @@ namespace MathForGames
 
             Vector2 Movedirection = new Vector2(xDirection, yDirection);
 
-            GetVelocity = Movedirection.Normalized * _speed * deltaTime;
+            Velocity = Movedirection.Normalized * _speed * deltaTime;
 
             LocalPosition += _velocity;
+
+            CurrChildren = CountChildren();
 
             base.Update(deltaTime);
         }
@@ -63,12 +78,31 @@ namespace MathForGames
             {
                 AddChild(collider);
             }
+            else if(collider is Car)
+            {
+                IsDead = true;
+            }
         }
 
         public override void Draw()
         {
             base.Draw();
             Collider.Draw();
+        }
+
+        public int CountChildren()
+        {
+            int NumOfChildren = 0;
+
+            for (int i = 0; i < Children.Length; i++)
+            {
+                if (Children[i] != null)
+                {
+                    NumOfChildren++;
+                }
+            }
+
+            return NumOfChildren;
         }
     }
 }

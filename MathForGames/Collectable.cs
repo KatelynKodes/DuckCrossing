@@ -36,7 +36,7 @@ namespace MathForGames
 
                 LocalPosition += Velocity;
             }
-            base.Update(deltaTime);
+            base.Update(deltaTime);  
         }
 
         public override void Draw()

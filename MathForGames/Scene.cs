@@ -85,6 +85,7 @@ namespace MathForGames
         /// </summary>
         public virtual void Draw()
         {
+            Raylib.ClearBackground(_backgroundColor);
             for (int i = 0; i < _actors.Length; i++)
             {
                 _actors[i].Draw();
