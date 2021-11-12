@@ -133,6 +133,8 @@ namespace MathForGames
             _scenes[_currentSceneIndex].Update(deltaTime);
             _scenes[_currentSceneIndex].UpdateUI(deltaTime);
 
+
+
             while (Console.KeyAvailable)
             {
                 Console.ReadKey(true);
