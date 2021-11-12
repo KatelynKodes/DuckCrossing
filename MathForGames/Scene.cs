@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Raylib_cs;
 
 namespace MathForGames
 {
@@ -11,11 +12,13 @@ namespace MathForGames
         /// </summary>
         private Actor[] _actors;
         private Actor[] _UIElements;
+        private Color _backgroundColor;
 
-        public Scene()
+        public Scene(Color backgroundColor)
         {
             _actors = new Actor[0];
             _UIElements = new Actor[0];
+            _backgroundColor = backgroundColor;
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ namespace MathForGames
     {
         private Vector2 _velocity;
         private float _speed;
+        private bool _isDead;
 
         public float Speed
         {
@@ -27,6 +28,7 @@ namespace MathForGames
             base(x, y, name, path)
         {
             _speed = speed;
+            _isDead = false;
         }
 
         /// <summary>

@@ -28,39 +28,18 @@ namespace MathForGames
 
         public override void Update(float DeltaTime)
         {
-            Vector2 moveDir = new Vector2();
-
-            if (LocalPosition == _endingPos)
-            {
-                moveDir = (_endingPos - LocalPosition).Normalized;
-            }
-            else if (LocalPosition == _startingPos)
-            {
-                moveDir = (_startingPos - LocalPosition).Normalized;
-            }
+            /* Vector2 moveDir = new Vector2();
 
             _velocity = moveDir * Speed * DeltaTime;
             LocalPosition += _velocity;
 
-            base.Update(DeltaTime);
+            base.Update(DeltaTime); */
         }
 
         public override void Draw()
         {
             base.Draw();
             Collider.Draw();
-        }
-
-        public override void OnCollision(Actor actor)
-        {
-            if (actor is Player)
-            {
-                // Kill the player and end the game
-            }
-            else if (actor is Collectable)
-            {
-                // Kill the chick
-            }
         }
     }
 }

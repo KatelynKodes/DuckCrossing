@@ -14,6 +14,8 @@ namespace MathForGames
         private static int _currentSceneIndex = 0;
         private static Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
+        private bool _playerDead;
+        private int _ducklingsCaught;
 
         /// <summary>
         /// Called to begin the application
@@ -56,9 +58,9 @@ namespace MathForGames
 
             //Create Window using raylib
             Raylib.InitWindow(800, 800, "Duck Crossing");
-            Scene CrossingScene = new Scene();
-            Scene WinningScene = new Scene();
-            Scene LosingScene = new Scene();
+            Scene CrossingScene = new Scene(Color.DARKGREEN);
+            Scene WinningScene = new Scene(Color.BLACK);
+            Scene LosingScene = new Scene(Color.BLACK);
 
             //Defining the Player
             Player MotherDuck = new Player(400, 750, 50f, "Duck", "");
@@ -94,7 +96,7 @@ namespace MathForGames
             //UI Text
             UIText Instructions = new UIText(0, 0, "Instructions Text", "", 
                 "Use the 'W, A, S, D' keys to move, run into ducklings to catch them.", 800, 70, 20);
-            Instructions.Collider = new AABBCollider(Instructions.Width, Instructions.Height, Instructions);
+            UIText CaughtText = new UIText(0, 40, "CaughtText", "", "Ducklings Caught: " + _ducklingsCaught, 200, 20, 20);
 
             //Adding actors to the scene
             CrossingScene.AddActor(MotherDuck);
@@ -107,6 +109,7 @@ namespace MathForGames
             CrossingScene.AddActor(car3);
             CrossingScene.AddActor(car4);
             CrossingScene.AddUIElement(Instructions);
+            CrossingScene.AddUIElement(CaughtText);
 
             _scenes = new Scene[] { CrossingScene, WinningScene, LosingScene };
 

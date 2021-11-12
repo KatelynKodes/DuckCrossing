@@ -26,7 +26,8 @@ namespace MathForGames
         public override void Draw()
         {
             Rectangle textbox = new Rectangle(LocalPosition.X, LocalPosition.Y, Width, Height);
-            Raylib.DrawTextRecEx(Font, Text, textbox, FontSize, 1, true, Color.WHITE, Color.BLACK);
+            Raylib.DrawRectangleRec(textbox, Color.BLACK);
+            Raylib.DrawTextRec(Font, Text, textbox, FontSize, 1, true, Color.WHITE);
         }
     }
 }
