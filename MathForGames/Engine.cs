@@ -14,6 +14,7 @@ namespace MathForGames
         private static int _currentSceneIndex = 0;
         private static Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
+        private int _maxChicks;
 
         /// <summary>
         /// Called to begin the application
@@ -77,6 +78,8 @@ namespace MathForGames
             Collectable Duckling4 = new Collectable(60, 300, 40f, "Duckling4", "");
             Duckling4.Collider = new CircleCollider(20, Duckling4);
 
+            _maxChicks = 4;
+
             //The cars
             Car car1 = new Car(150, 10, 60f, 750, "car1", "");
             car1.Collider = new AABBCollider(50, 115, car1);
@@ -94,7 +97,8 @@ namespace MathForGames
             //UI Text
             UIText Instructions = new UIText(0, 0, "Instructions Text", "", 
                 "Use the 'W, A, S, D' keys to move, run into ducklings to catch them.", 800, 70, 20);
-            UIText CaughtText = new UIText(0, 40, "CaughtText", "", "Ducklings Caught: " + MotherDuck.CurrChildren, 200, 20, 20);
+            UIText CaughtText = new UIText(0, 40, "CaughtText", "", "", 200, 20, 20);
+            ScoreHolder ScoreCounter = new ScoreHolder(0, 40, "Scorecounter", "", MotherDuck, CaughtText);
 
             UIText WinningMessage = new UIText(400, 400, "Winning Message", "",
                 "You Win! The ducklings are safe :) close the window to end the game", 800, 70, 50);
@@ -114,6 +118,7 @@ namespace MathForGames
             CrossingScene.AddActor(car4);
             CrossingScene.AddUIElement(Instructions);
             CrossingScene.AddUIElement(CaughtText);
+            CrossingScene.AddUIElement(ScoreCounter);
 
             //Adding UI to the Winning and Losing Screens
             WinningScene.AddUIElement(WinningMessage);
@@ -132,8 +137,6 @@ namespace MathForGames
         {
             _scenes[_currentSceneIndex].Update(deltaTime);
             _scenes[_currentSceneIndex].UpdateUI(deltaTime);
-
-
 
             while (Console.KeyAvailable)
             {

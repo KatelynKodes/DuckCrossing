@@ -336,5 +336,20 @@ namespace MathForGames
 
             Rotate(angle);
         }
+
+        public bool ContainsChild(Actor child)
+        {
+            bool childfound = false;
+
+            foreach (Actor c in _children)
+            {
+                if (child == c)
+                {
+                    childfound = true;
+                }
+            }
+
+            return childfound;
+        }
     }
 }

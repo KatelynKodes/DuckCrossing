@@ -61,8 +61,6 @@ namespace MathForGames
 
             LocalPosition += _velocity;
 
-            CurrChildren = CountChildren();
-
             base.Update(deltaTime);
         }
 
@@ -74,9 +72,10 @@ namespace MathForGames
         /// <param name="collider"> The actor the player collided with </param>
         public override void OnCollision(Actor collider)
         {
-            if (collider is Collectable)
+            if (collider is Collectable && !ContainsChild(collider))
             {
                 AddChild(collider);
+                CurrChildren++;
             }
             else if(collider is Car)
             {
@@ -88,21 +87,6 @@ namespace MathForGames
         {
             base.Draw();
             Collider.Draw();
-        }
-
-        public int CountChildren()
-        {
-            int NumOfChildren = 0;
-
-            for (int i = 0; i < Children.Length; i++)
-            {
-                if (Children[i] != null)
-                {
-                    NumOfChildren++;
-                }
-            }
-
-            return NumOfChildren;
         }
     }
 }
