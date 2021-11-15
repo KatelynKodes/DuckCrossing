@@ -5,7 +5,7 @@ HOW TO INSTALL:
 Once you downloaded the .zip file off of Github, extract the files into a desired folder. 
 
 HOW TO RUN:
-Once your extracted files are in your desired folder, find the application
+Once your extracted files are in your desired folder, find the application titled 
 
 HOW TO PLAY:
 Use the WASD keys to move forward, right, left, and downward and use the SHIFT key to run. Collect chicks by running into them
