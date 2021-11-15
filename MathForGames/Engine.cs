@@ -58,53 +58,65 @@ namespace MathForGames
             //Create Window using raylib
             Raylib.InitWindow(800, 800, "Duck Crossing");
             Scene CrossingScene = new Scene(Color.DARKGREEN);
-            Scene WinningScene = new Scene(Color.GREEN);
+            Scene WinningScene = new Scene(Color.LIME);
             Scene LosingScene = new Scene(Color.RED);
 
             //Defining the Player
-            Player MotherDuck = new Player(400, 750, 50f, "Duck", "");
+            Player MotherDuck = new Player(400, 750, 200f, "Duck", "");
             MotherDuck.Collider = new AABBCollider(50, 50, MotherDuck);
 
             //Ducklings
-            Collectable Duckling1 = new Collectable(500, 500, 40f, "Duckling1", "");
+            Collectable Duckling1 = new Collectable(500, 500, 100f, "Duckling1", "");
             Duckling1.Collider = new CircleCollider(20, Duckling1);
 
-            Collectable Duckling2 = new Collectable(94, 100, 40f, "Duckling2", "");
+            Collectable Duckling2 = new Collectable(94, 100, 100f, "Duckling2", "");
             Duckling2.Collider = new CircleCollider(20, Duckling2);
 
-            Collectable Duckling3 = new Collectable(500, 300, 40f, "Duckling3", "");
+            Collectable Duckling3 = new Collectable(500, 300, 100f, "Duckling3", "");
             Duckling3.Collider = new CircleCollider(20, Duckling3);
 
-            Collectable Duckling4 = new Collectable(60, 300, 40f, "Duckling4", "");
+            Collectable Duckling4 = new Collectable(60, 300, 100f, "Duckling4", "");
             Duckling4.Collider = new CircleCollider(20, Duckling4);
 
             _maxChicks = 4;
 
             //The cars
-            Car car1 = new Car(150, 10, 60f, 750, "car1", "");
+            Car car1 = new Car(150, 130, 5f, "car1", "");
             car1.Collider = new AABBCollider(50, 115, car1);
 
-            Car car2 = new Car(280, 750, 60f, 10, "car2", "");
+            Car car2 = new Car(280, 750, 5f, "car2", "");
             car2.Collider = new AABBCollider(50, 115, car2);
 
-            Car car3 = new Car(550, 10, 60f, 750, "car3", "");
+            Car car3 = new Car(550, 130, 5f, "car3", "");
             car3.Collider = new AABBCollider(50, 115, car3);
 
-            Car car4 = new Car(680, 750, 60f, 10, "car4", "");
+            Car car4 = new Car(680, 750, 5f, "car4", "");
             car4.Collider = new AABBCollider(50, 115, car4);
+
+            //Streets
+            Actor Street1 = new Actor(100, 70, "Street1", "");
+            Street1.Collider = new AABBCollider(100, 800, Street1);
+
+            Actor Street2 = new Actor(230, 70, "Street2", "");
+            Street2.Collider = new AABBCollider(100, 900, Street2);
+
+            Actor Street3 = new Actor(500, 70, "Street3", "");
+            Street3.Collider = new AABBCollider(100, 900, Street3);
+
+            Actor Street4 = new Actor(630, 70, "Street4", "");
+            Street4.Collider = new AABBCollider(100, 900, Street4);
 
 
             //UI Text
             UIText Instructions = new UIText(0, 0, "Instructions Text", "", 
-                "Use the 'W, A, S, D' keys to move, run into ducklings to catch them.", 800, 70, 20);
+                "Use the 'W, A, S, D' keys to move, run into ducklings to catch them.", 800, 70, 20, Color.BLACK);
             UIText CaughtText = new UIText(0, 40, "CaughtText", "", "", 200, 20, 20);
             ScoreHolder ScoreCounter = new ScoreHolder(0, 40, "Scorecounter", "", MotherDuck, CaughtText);
 
-            UIText WinningMessage = new UIText(400, 400, "Winning Message", "",
+            UIText WinningMessage = new UIText(30, 300, "Winning Message", "",
                 "You Win! The ducklings are safe :) close the window to end the game", 800, 70, 50);
-            UIText LosingMessage = new UIText(400, 400, "Losing Message", "",
-                "Oh no! You died before you could grab all your ducklings :( \n Ducklings Caught: " + MotherDuck.CurrChildren  +
-                "close the window to end the game", 800, 70, 20);
+            UIText LosingMessage = new UIText(30, 300, "Losing Message", "",
+                "Oh no! You died before you could grab all your ducklings :( Ducklings Caught: " + MotherDuck.CurrChildren, 800, 500, 40);
 
             //Adding actors to the crossing scene
             CrossingScene.AddActor(MotherDuck);
@@ -116,6 +128,10 @@ namespace MathForGames
             CrossingScene.AddActor(car2);
             CrossingScene.AddActor(car3);
             CrossingScene.AddActor(car4);
+            CrossingScene.AddActor(Street1);
+            CrossingScene.AddActor(Street2);
+            CrossingScene.AddActor(Street3);
+            CrossingScene.AddActor(Street4);
             CrossingScene.AddUIElement(Instructions);
             CrossingScene.AddUIElement(CaughtText);
             CrossingScene.AddUIElement(ScoreCounter);
@@ -142,6 +158,15 @@ namespace MathForGames
             {
                 Console.ReadKey(true);
             }
+
+            if (AllChicksCaught())
+            {
+                _currentSceneIndex = 1;
+            }
+            else if (CheckPlayerStatus())
+            {
+                _currentSceneIndex = 2;
+            }
         }
 
         /// <summary>
@@ -161,15 +186,6 @@ namespace MathForGames
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.BLACK);
-            //Raylib.DrawRectangle(0, 0, 800, 70, Color.BLACK);
-
-            //Street
-            Raylib.DrawRectangle(100, 70, 100, 900, Color.GRAY);
-            Raylib.DrawRectangle(230, 70, 100, 900, Color.GRAY);
-
-            Raylib.DrawRectangle(500, 70, 100, 900, Color.GRAY);
-            Raylib.DrawRectangle(630, 70, 100, 900, Color.GRAY);
-
 
             //Adds all actor icons to buffer
             _scenes[_currentSceneIndex].Draw();
@@ -228,9 +244,43 @@ namespace MathForGames
             _applicationShouldClose = true;
         }
 
-        private void InitializeCrossingScene()
+        private bool AllChicksCaught()
         {
-            
+            bool allChicksCaught = false;
+
+            for (int i = 0; i < _scenes[_currentSceneIndex].Actors.Length; i++)
+            {
+                if (_scenes[_currentSceneIndex].Actors[i] is Player)
+                {
+                    Player tempPlayer = (Player)_scenes[_currentSceneIndex].Actors[i];
+                    if (tempPlayer.CurrChildren == _maxChicks)
+                    {
+                        allChicksCaught = true;
+                    }
+                }
+            }
+
+            return allChicksCaught;
+        }
+
+        private bool CheckPlayerStatus()
+        {
+            bool isDead = false;
+
+            for (int i = 0; i < _scenes[_currentSceneIndex].Actors.Length; i++)
+            {
+                if (_scenes[_currentSceneIndex].Actors[i] is Player)
+                {
+                    Player tempPlayer = (Player)_scenes[_currentSceneIndex].Actors[i];
+                    if (tempPlayer.IsDead)
+                    {
+                        isDead = true;
+                        
+                    }
+                }
+            }
+
+            return isDead;
         }
     }
 }

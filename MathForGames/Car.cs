@@ -8,9 +8,12 @@ namespace MathForGames
     class Car: Actor
     {
         private float _speed;
-        private Vector2 _velocity;
-        private float _maxY;
         private float _var = 0f;
+        private Vector2 _startPosition;
+        private float _frequency = 5f;
+        private float _offset = 0f;
+        private float _magnitude = 5f;
+        private float _val = 0f;
 
         public float Speed
         {
@@ -18,23 +21,17 @@ namespace MathForGames
             set { _speed = value; }
         }
 
-        public Vector2 Velocity
-        {
-            get { return _velocity; }
-            set { _velocity = value; }
-        }
 
-        public Car(float x, float y, float speed, float maxY, string name, string path) : base(x, y, name, path)
+
+        public Car(float x, float y, float speed, string name, string path) : base(x, y, name, path)
         {
-            _maxY = maxY;
+            _startPosition = new Vector2(x, y);
             _speed = speed;
         }
 
         public override void Update(float DeltaTime)
         {
-            Vector2 Movedir = new Vector2(0, _maxY) * MathF.Cos(_var + DeltaTime);
-            Velocity = Movedir * Speed;
-            LocalPosition += Velocity * _speed;
+            LocalPosition = _startPosition + new Vector2(0,30) * MathF.Sin((_val += DeltaTime) * _frequency + _offset) * _magnitude * Speed;
         }
 
         public override void Draw()

@@ -10,6 +10,7 @@ namespace MathForGames
     {
         private Vector2 _velocity;
         private float _speed;
+        private float _defaultSpeed;
         private bool _isDead;
         private int _currChildren;
 
@@ -41,6 +42,7 @@ namespace MathForGames
             base(x, y, name, path)
         {
             _speed = speed;
+            _defaultSpeed = _speed;
             _isDead = false;
         }
 
@@ -53,7 +55,16 @@ namespace MathForGames
             int xDirection = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_A)) +
                 Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_D));
             int yDirection = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_W)) +
-                Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_S)); ;
+                Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_S));
+
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT))
+            {
+                _speed += 0.4f;
+            }
+            else
+            {
+                _speed = _defaultSpeed;
+            }
 
             Vector2 Movedirection = new Vector2(xDirection, yDirection);
 

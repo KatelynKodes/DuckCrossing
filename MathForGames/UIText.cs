@@ -12,6 +12,7 @@ namespace MathForGames
         private int _height;
         private int _fontSize;
         private Font _font;
+        private Color _textboxColor;
 
         public string Text
         {
@@ -31,7 +32,7 @@ namespace MathForGames
             set { _height = value; }
         }
 
-        public UIText(float x, float y, string name, string path, string text, int width, int height, int fontsize)
+        public UIText(float x, float y, string name, string path, string text, int width, int height, int fontsize, Color textboxColor = new Color())
             :base(x, y, name, path)
         {
             Text = text;
@@ -39,12 +40,13 @@ namespace MathForGames
             Height = height;
             _fontSize = fontsize;
             _font = Raylib.LoadFont("resources/fonts/pixelplay.png");
+            _textboxColor = textboxColor;
         }
 
         public override void Draw()
         {
             Rectangle textbox = new Rectangle(LocalPosition.X, LocalPosition.Y, Width, Height);
-            Raylib.DrawRectangleRec(textbox, Color.BLACK);
+            Raylib.DrawRectangleRec(textbox, _textboxColor);
             Raylib.DrawTextRec(_font, Text, textbox, _fontSize, 1, true, Color.WHITE);
         }
     }

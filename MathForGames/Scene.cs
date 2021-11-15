@@ -14,6 +14,11 @@ namespace MathForGames
         private Actor[] _UIElements;
         private Color _backgroundColor;
 
+        public Actor[] Actors
+        {
+            get { return _actors; }
+        }
+
         public Scene(Color backgroundColor)
         {
             _actors = new Actor[0];
