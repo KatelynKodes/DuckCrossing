@@ -21,8 +21,6 @@ namespace MathForGames
             set { _speed = value; }
         }
 
-
-
         public Car(float x, float y, float speed, string name, string path) : base(x, y, name, path)
         {
             _startPosition = new Vector2(x, y);

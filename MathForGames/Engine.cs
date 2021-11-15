@@ -15,6 +15,7 @@ namespace MathForGames
         private static Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
         private int _maxChicks;
+        private int _caughtBeforeLoss = 0;
 
         /// <summary>
         /// Called to begin the application
@@ -109,14 +110,15 @@ namespace MathForGames
 
             //UI Text
             UIText Instructions = new UIText(0, 0, "Instructions Text", "", 
-                "Use the 'W, A, S, D' keys to move, run into ducklings to catch them.", 800, 70, 20, Color.BLACK);
-            UIText CaughtText = new UIText(0, 40, "CaughtText", "", "", 200, 20, 20);
+                "Use 'W, A, S, D' keys to move, run into ducklings to catch them. Use left 'SHIFT' to run", 800, 70, 20, Color.BLACK);
+            UIText CaughtText = new UIText(620, 40, "CaughtText", "", "", 200, 20, 20);
             ScoreHolder ScoreCounter = new ScoreHolder(0, 40, "Scorecounter", "", MotherDuck, CaughtText);
 
-            UIText WinningMessage = new UIText(30, 300, "Winning Message", "",
-                "You Win! The ducklings are safe :) close the window to end the game", 800, 70, 50);
-            UIText LosingMessage = new UIText(30, 300, "Losing Message", "",
-                "Oh no! You died before you could grab all your ducklings :( Ducklings Caught: " + MotherDuck.CurrChildren, 800, 500, 40);
+            UIText WinningMessage = new UIText(50, 300, "Winning Message", "",
+                "You Win! The ducklings are safe", 800, 300, 50);
+            UIText LosingMessage = new UIText(150, 300, "Losing Message", "",
+                "You Lose! You died before you could grab all your ducklings.", 600, 300, 40);
+            UIText CloseWindowMessage = new UIText(250, 700, "CloseWindowMessage", "", "You may now close the software", 350, 70, 20);
 
             //Adding actors to the crossing scene
             CrossingScene.AddActor(MotherDuck);
@@ -138,7 +140,9 @@ namespace MathForGames
 
             //Adding UI to the Winning and Losing Screens
             WinningScene.AddUIElement(WinningMessage);
+            WinningScene.AddUIElement(CloseWindowMessage);
             LosingScene.AddUIElement(LosingMessage);
+            LosingScene.AddUIElement(CloseWindowMessage);
 
             _scenes = new Scene[] { CrossingScene, WinningScene, LosingScene };
 
@@ -187,7 +191,6 @@ namespace MathForGames
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.BLACK);
 
-            //Adds all actor icons to buffer
             _scenes[_currentSceneIndex].Draw();
             _scenes[_currentSceneIndex].DrawUI();
 
@@ -244,6 +247,13 @@ namespace MathForGames
             _applicationShouldClose = true;
         }
 
+
+        /// <summary>
+        /// grabs an instance of a Player from the scene at the current scene index and 
+        /// checks to see if the number of children matches the maximum
+        /// number of chicks the player has to collect.
+        /// </summary>
+        /// <returns> True if the player variable given has the same amount of children as the maximum number of chicks to collect </returns>
         private bool AllChicksCaught()
         {
             bool allChicksCaught = false;
@@ -263,6 +273,10 @@ namespace MathForGames
             return allChicksCaught;
         }
 
+        /// <summary>
+        /// grabs an instance of the current player and checks if the player has died or not
+        /// </summary>
+        /// <returns> true if the player's IsDead bool is true </returns>
         private bool CheckPlayerStatus()
         {
             bool isDead = false;
@@ -275,7 +289,6 @@ namespace MathForGames
                     if (tempPlayer.IsDead)
                     {
                         isDead = true;
-                        
                     }
                 }
             }
