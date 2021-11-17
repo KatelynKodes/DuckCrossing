@@ -10,12 +10,11 @@ namespace MathForGames
 {
     class Engine
     {
-        public static bool _applicationShouldClose = false;
+        private static bool _applicationShouldClose = false;
         private static int _currentSceneIndex = 0;
         private static Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
         private int _maxChicks;
-        private int _caughtBeforeLoss = 0;
 
         /// <summary>
         /// Called to begin the application
@@ -50,7 +49,8 @@ namespace MathForGames
         }
 
         /// <summary>
-        /// Called when the application starts
+        /// Called when the application starts, initializes actors in scenes
+        /// Also initializes starting values
         /// </summary>
         private void Start()
         {
@@ -158,11 +158,6 @@ namespace MathForGames
             _scenes[_currentSceneIndex].Update(deltaTime);
             _scenes[_currentSceneIndex].UpdateUI(deltaTime);
 
-            while (Console.KeyAvailable)
-            {
-                Console.ReadKey(true);
-            }
-
             if (AllChicksCaught())
             {
                 _currentSceneIndex = 1;
@@ -223,23 +218,6 @@ namespace MathForGames
             return _scenes.Length - 1;
         }
 
-
-        /// <summary>
-        /// Gets the next key in the input stream
-        /// </summary>
-        /// <returns>The key that was pressed</returns>
-        public static ConsoleKey GetConsoleKey()
-        {
-            //If there is No Key being pressed...
-            if (!Console.KeyAvailable)
-            {
-                //...Return
-                return 0;
-            }
-
-            //Return the current key being pressed
-            return Console.ReadKey(true).Key;
-        }
 
         //Closes the Application
         public static void CloseApplication()

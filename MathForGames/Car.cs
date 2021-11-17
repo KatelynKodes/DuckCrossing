@@ -26,11 +26,18 @@ namespace MathForGames
             _speed = speed;
         }
 
+        /// <summary>
+        /// Moves car in an upward and downward hovering motion
+        /// </summary>
+        /// <param name="DeltaTime"></param>
         public override void Update(float DeltaTime)
         {
             LocalPosition = _startPosition + new Vector2(0,30) * MathF.Sin((_val += DeltaTime) * _frequency + _offset) * _magnitude * Speed;
         }
 
+        /// <summary>
+        /// Draws car to raylib window
+        /// </summary>
         public override void Draw()
         {
             base.Draw();

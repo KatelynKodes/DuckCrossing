@@ -27,6 +27,11 @@ namespace MathForGames
             _speed = speed;
         }
 
+        /// <summary>
+        /// If the collectable has a parent, it follows that parent
+        /// Runs every frame
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public override void Update(float deltaTime)
         {
             if (Parent != null && Parent is Player)
@@ -39,6 +44,10 @@ namespace MathForGames
             base.Update(deltaTime);  
         }
 
+        /// <summary>
+        /// Draws Collectable to the raylib window as well as it's
+        /// collider
+        /// </summary>
         public override void Draw()
         {
             base.Draw();

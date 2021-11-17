@@ -337,6 +337,11 @@ namespace MathForGames
             Rotate(angle);
         }
 
+        /// <summary>
+        /// Checks if the scene's Actor array contains a specific child
+        /// </summary>
+        /// <param name="child"></param>
+        /// <returns></returns>
         public bool ContainsChild(Actor child)
         {
             bool childfound = false;

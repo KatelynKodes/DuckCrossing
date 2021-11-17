@@ -28,6 +28,11 @@ namespace MathForGames
             Raylib.DrawCircleLines((int)Owner.LocalPosition.X, (int)Owner.LocalPosition.Y, _collisionRadius, Color.GREEN);
         }
 
+        /// <summary>
+        /// Checks collision with another circleCollider
+        /// </summary>
+        /// <param name="other"> the other circlecollider being checked</param>
+        /// <returns> true if distance <= combinedRadii</returns>
         public override bool CheckCollisionCircle(CircleCollider other)
         {
             if (other.Owner == Owner)
@@ -43,10 +48,10 @@ namespace MathForGames
         }
 
         /// <summary>
-        /// 
+        /// Checks collision with an AABB Collider
         /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
+        /// <param name="other"> The AABB Collider being checked </param>
+        /// <returns> Returns true if distFromClosestPoin <= CollisionRadius</returns>
         public override bool CheckCollisionAABB(AABBCollider other)
         {
             //Returns false if this collider is checking collision against itself.

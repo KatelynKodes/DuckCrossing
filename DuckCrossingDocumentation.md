@@ -40,13 +40,13 @@
 ### Collision and Chase Behavior
 ### Movement Behavior
 ### Win Behavior
-## Lose Behavior
+### Lose Behavior
 
 ## II. Design
 
 1. _System architecture_
 
-    Every object in every scene derives from an Actor class, placed into an Actor array and placed inside the an instance if the Scene class itself, rather than having more than one scene in the engine class alone. 
+    The game is divided up into objects known as Scenes, these scenes are where parts of the game take place. This includes title screens, certain points in gameplay, or screens that show the user whether they won or lost the game. Every object in every scene derives from an Actor class, placed into an Actor array and placed inside the an instance if the Scene class itself. Actors may derive from children of the Actor class, which are specific subclasses that have distinct differences to one another and don't behave in the same way. Collider objects, also inherit from one parent class, the Collider class. There are two types of colliders, CircleColliders and AABB Colliders (also known as Box-Colliders), this was done to give a bit of variety to the types of colliders an object can have as well as fit certain object shapes if needed. The reason there are so many classes and children of some classes in this program is to attempt to make building a bigger program easier for the developer and make it so where the Engine class is only responsible for handling engine related activities, such as changing scenes when need be and checking win/lose conditions every time the game updates.
 
 2. _Object Information_ 
 
@@ -391,6 +391,357 @@
             - Description: Draws the collectable to the Raylib window, making it visible to the user. Calls the base and the Collider's Draw() method.
             - Visibility: Public (override)
             - Arguments: none
-    
+    - **FileName**: Collider.cs
+        - Name: ColliderType (enum)
+        - Description: Contains the types of shapes a collider can be, holds values of CIRCLE and AABB
+        - Visibility: private
 
-             
+        - **Class Name**: Collider
+            - Name: _owner (Actor)
+            - Description: A variable that contains an Actor object, considered to be the owner of the collider.
+            - Visibility: private
+
+            - Name: _colliderType (ColliderType)
+            - Description: A variable containing a value from the ColliderType enum, represents the collider type of the collider.
+            - Visibility: private
+
+            - Name: Owner (Actor)
+            - Description: A property that returns and sets the value of the _owner variable.
+            - Visibility: public
+
+            - Name: ColliderType (ColliderType Enum)
+            - Description: A property that returns the value of the _colliderType value.
+            - Visibility: public
+
+            - Name: Collider()
+            - Description: Base constructor for the collider class, sets _owner variable to the owner argument and the _colliderType variable to the colliderType argument.
+            - Visibility: public
+            - Arguments: owner (Actor), colliderType (ColliderType Enum)
+
+            - Name: Draw()
+            - Description: Empty virtual method used in child classes
+            - Visibility: public (virtual)
+            - Arguments: none
+
+            - Name: CheckCollider()
+            - Description: Checks whether the actors collider is either a Circle or an AABB collider. Then calls appropriate method, returning the bool output it returns.
+            - Visibility: public
+            - Arguments: other (Actor)
+
+            - Name: CheckCollisionCircle()
+            - Description: An empty virtual void method only used in child classes
+            - Visibility: Public (virtual)
+            - Arguments: other (CircleCollider)
+
+            - Name: CheckCollisionAABB()
+            - Description: An empty virtual void method only used in child classes
+            - Visibility: Public (virtual)
+            - Arguments: other (AABBCollider)
+    - **FileName**: Engine.cs
+        - **Class Name** Engine
+            - Name: _applicationShouldClose (bool)
+            - Description: A boolean variable referencing when it is okay for the program to close the application
+            - Visibility: private (static)
+
+            - Name: _currentSceneIndex (int)
+            - Description: An integer variable containing the current index in the scene array.
+            - Visibility: private (static)
+
+            - Name: _Scenes (Scene[])
+            - Description: An array containing scene objects
+            - Visibility: private (static)
+
+            - Name: _stopwatch (Stopwatch)
+            - Description: A variable containing a Stopwatch, a System.Diagnostics variable type that provides a set of methods and properties that can be used to measure elapsed time.
+            - Visibility: private
+
+            - Name: _maxChicks (int)
+            - Description: An integer variable containing the maximum number of chicks the player can capture in the game.
+            - Visibility: private
+
+            - Name: Run()
+            - Description: Controls the entire game loop, calls start method then calls the update and draw method until the Raylib.WindowShould close or if _application should close returns true
+            - Visibility: public 
+            - Arguments: none
+
+            - Name: Start()
+            - Description: Initializes all starting variables as well as actors and UI elements, adding them to scene actor arrays.
+            - Visibility: private 
+            - Arguments: none
+
+            - Name: Update()
+            - Description: Calls the Update and UpdateUI methods in the current scene, then checks to see if player has collected all they needed to collect or if they have died
+            - Visibility:  private
+            - Arguments: deltaTime (float)
+
+            - Name: End()
+            - Description: Calls the end function in the current scene, closes the Raylib window, and clears the console.
+            - Visibility:  private
+            - Arguments: none
+
+            - Name: Draw()
+            - Description:
+            - Visibility: private 
+            - Arguments: none
+
+            - Name: AddScene()
+            - Description: Adds a new scene object that is passed into the method to the Engine's Scene object array.
+            - Visibility: Public
+            - Arguments: scene (Scene)
+
+            - Name: CloseApplication()
+            - Description: Sets _applicationShouldClose to be true
+            - Visibility: Public
+            - Arguments: none
+
+            - Name: AllChicksCaught()
+            - Description: Finds the player in the current scene array and returns true if the player's amount of chick's caught is equal to the _maxChicks variable
+            - Visibility: private
+            - Arguments: none
+
+            - Name: CheckPlayerStatus()
+            - Description: Finds the player in the current scene array and returns true if the player's IsDead bool is equal to true.
+            - Visibility: private
+            - Arguments: none
+    - **Filename**: Player.cs
+        - **Class Name**: Player : Actor
+            - Name: _velocity (Vector2)
+            - Description: A vector2 variable containing values that represent the players velocity
+            - Visibility: private
+
+            - Name: _speed (float)
+            - Description: a float variable containing a value representing the players speed.
+            - Visibility: private
+
+            - Name: _defaultSpeed (float)
+            - Description: a float variable containing a value representing the players default speed.
+            - Visibility: private
+
+            - Name: _isDead (bool)
+            - Description: a bool variable that returns true if the player is dead, false if the player is alive.
+            - Visibility: private
+
+            - Name: _currChildren (int)
+            - Description: an int variable representing how many children the player has in their children array.
+            - Visibility: private
+
+            - Name: IsDead (bool)
+            - Description: a property that returns and privately sets the value of _isDead
+            - Visibility: public
+
+            - Name: CurrChildren (int)
+            - Description: a property that returns and privately sets the value of _currChildren
+            - Visibility: public
+
+            - Name: Speed (float)
+            - Description: a property that returns and sets the value of _speed
+            - Visibility: public
+
+            - Name: Velocity (Vector2)
+            - Description: a property that returns and sets the value of _velocity
+            - Visibility: public
+
+            - Name: Player()
+            - Description: Constructor of Player class, also calls the base constructor, sets _speed to speed argument, sets _defaultSpeed to _speed, and sets _isDead to false
+            - Visibility: public
+            - Arguments: x (float), y (float), speed (float), name (string), path (string)
+
+            - Name: Update()
+            - Description: Checks which button is pressed by the player, then moves the player object to that position. Also checks if player is holding shift before increasing the speed, Updates every frame
+            - Visibility: public
+            - Arguments: deltaTime (float)
+
+            - Name: OnCollision()
+            - Description: Detects if the object the player collided with is a Collectable or a Car object. If it's a collectable, the object is added to the players children and the CurrChildren value is increased. If it's a Car object, the player's IsDead bool is set to true.
+            - Visibility: public (override)
+            - Arguments: collider (Actor)
+
+            - Name: Darw()
+            - Description: Draws Player object to the screen so it is visible to the user by calling the base.Draw() method and drawing the collider object to the screen using Collider.Draw() method.
+            - Visibility: public
+            - Arguments: none
+    - **Filename**: Scene.cs
+        - **Class Name**: Scene
+            - Name: _actors (Actor[])
+            - Description: An array containing all the actors in a given scene.
+            - Visibility: private
+
+            - Name: _UIElements (Actor[])
+            - Description: An array containing all the UI Elements in a given scene.
+            - Visibility: private
+
+            - Name: _backgroundColor (Color)
+            - Description: A variable containing the color of the background in the current scene.
+            - Visibility: private
+
+            - Name: Actors (Actor[])
+            - Description: A property that returns the value of the variable _actors
+            - Visibility: public
+
+            - Name: Scene()
+            - Description: Base constuctor of the class, sets _actors and _UIElements to a new Actor array, and sets the background color to the backgroundColor Argument passed through the constructor. 
+            - Visibility: public
+            - Arguments: backgroundColor (Color)
+
+            - Name: Start()
+            - Description: Calls start for all the actors in the _actors array
+            - Visibility: Public (virtual)
+            - Arguments: none
+
+            - Name: Update()
+            - Description: Calls start for the actors in _actors array if the actor hasn't called it already, then calls the Update method for every actor. Also checks for collision for every Actor in the array.
+            - Visibility: public
+            - Arguments: deltaTime
+
+            - Name: UpdateUI()
+            - Description: Calls the start method for every actor in _UIElements array if it hasn't started already, then calls the Update method on every actor in the array.
+            - Visibility: public
+            - Arguments: deltaTime (float)
+
+            - Name: End()
+            - Description: Calls End for all the actors in the _actors array
+            - Visibility: public (virtual)
+            - Arguments: none
+
+            - Name: Draw()
+            - Description: Calls draw for all the actors in the _actors array
+            - Visibility: public (virtual)
+            - Arguments: none
+
+            - Name: DrawUI()
+            - Description: Calls draw for all the actors in the _UIElements array
+            - Visibility: public (virtual)
+            - Arguments: none
+
+            - Name: AddActor()
+            - Description: Adds a specified actor passed into the method to the _actors array by creating a temporary array that's one space longer, adding values of the _actors array to that temporary array, setting the empty space in the array to the actor being passed through, then setting the _actors array to the temporary array.
+            - Visibility: public
+            - Arguments: actor (Actor)
+
+            - Name: AddUIElement()
+            - Description: Adds a specified actor passed into the method to the _UIElements array by creating a temporary array that's one space longer, adding values of the _UIElements array to that temporary array, setting the empty space in the array to the actor being passed through, then setting the _UIElements array to the temporary array.
+            - Visibility: public
+            - Arguments: UIElement (Actor)
+
+            - Name: RemoveActor()
+            - Description: Removes a specified actor from the _actors array by creating a new, temporary array that is one unit shorter than the _actors array then adding elements from the _actors array as long as those elements are not equal to the actor trying to be removed. Will set an ActorRemoved variable to true if the actor is found in the _actors array and the _actors array is set to the new temporary array.
+            - Visibility: public
+            - Arguments: actor (Actor)
+    - **Filename**: ScoreHolder.cs
+        - **Class Name**: ScoreHolder : Actor
+            - Name: _player (Player)
+            - Description: A Player variable containing a refrence to a Player object
+            - Visibility: private
+
+            - Name: _counter (UIText)
+            - Description: A UIText variable containing a refrence to a UIText object
+            - Visibility: private
+
+            - Name: Scoreholder()
+            - Description: Base constructor of the ScoreHolder object, sets _player to the player argument, and sets the _counter to the counter argument. Uses other arguments to fill out base class.
+            - Visibility: private
+            - Arguments: x (float), y (float), name (string), path (string),  player (Player), counter (UIText)
+
+            - Name: Start()
+            - Description: Calls the base.Start() method and the _counter.Start() method
+            - Visibility: public
+            - Arguments: none
+
+            - Name: Update()
+            - Description: updates the counter text based on how many chicks were caught
+            - Visibility: public
+            - Arguments: deltaTime (float)
+
+            - Name: Draw()
+            - Description: calls the _counter.Draw() method
+            - Visibility: public
+            - Arguments: none
+    - **FileName**: Sprite.cs
+        - **Class Name**: Sprite
+            - Name: _texture (Texture2D)
+            - Description: A Texture2D variable containing the flat, two-dimensional texture of the sprite
+            - Visibility: private
+
+            - Name: Width (int)
+            - Description: A property that returns and privately sets the _texture.width variable.
+            - Visibility: public
+
+            - Name: Height (int)
+            - Description: A property that returns and privately sets the _texture.height variable.
+            - Visibility: public
+
+            - Name: Sprite()
+            - Description: Base constructor for the Sprite class, sets the _texture to the path argument by using the Raylib.LoadTexture() method
+            - Visibility: private
+            - Arguments: path (string)
+
+            - Name: Draw()
+            - Description: Draws the sprite onto the raylib window so that it is part of the user interface and is visible to the user.
+            - Visibility: Public
+            - Arguments: transform (matrix3)
+    - **FileName**: UIText.cs
+        - **Class Name** UIText : Actor
+            - Name: _text (string)
+            - Description: A string variable holding the text element of the UIText object
+            - Visibility: private
+
+            - Name: _width (int)
+            - Description: An int variable that refrences the width of the UIText object
+            - Visibility: private
+
+            - Name: _height (int)
+            - Description: An int variable that refrences the height of the UIText object
+            - Visibility: private
+
+            - Name: _fontSize (int)
+            - Description: An int variable that refrences the number representing the UIText object text's font size
+            - Visibility: private
+
+            - Name: _font (Font)
+            - Description: A Font type variable that represents the font the UIText object text will be displayed in
+            - Visibility: private
+
+            - Name: _textboxColor (Color)
+            - Description: A Color type variable that represents the Color of the textbox used to display text clearly
+            - Visibility: private
+
+            - Name: Text (string)
+            - Description: A property returning and setting the _text variable 
+            - Visibility: public
+
+            - Name: Width (string)
+            - Description: A property returning and setting the _width variable 
+            - Visibility: public
+
+            - Name: Height (string)
+            - Description: A property returning and setting the _height variable 
+            - Visibility: public
+
+            - Name: UIText()
+            - Description: constructor for the UIText object, sets Text to text argument, Width to width argument, Height to height argument, _fontsize to fontsize argument, _font to a font from Raylib.LoadFont() method, and _textboxColor is set to textboxColor argument. Any other arguments are sent to the base class.
+            - Visibility: public
+            - Arguments: x (float), y (float), name (string), path (string), text (string), width (int), height (int), fontsize (int), textboxColor (Color)
+
+            - Name: Draw()
+            - Description: Draws the text within the bounds of an assigned rectangle using the Raylib.DrawTextRec() method and also drawing a texbox behind the text using the Raylib.DrawRectangleRec() method.
+            - Visibility: public (override)
+            - Arguments: nones
+
+            
+            
+
+            
+
+            
+
+            
+
+
+
+
+
+
+
+
+    
+            

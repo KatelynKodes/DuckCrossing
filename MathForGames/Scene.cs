@@ -31,6 +31,8 @@ namespace MathForGames
         /// </summary>
         public virtual void Start()
         {
+            for(int i = 0; i < _actors.Length; i++)
+                _actors[i].Start();
         }
 
         /// <summary>
@@ -149,7 +151,7 @@ namespace MathForGames
         }
 
         /// <summary>
-        /// Removes a specified actor from a given Array
+        /// Removes a specified actor from the _actors Array
         /// </summary>
         /// <param name="actor">The actor the player must get rid of </param>
         /// <returns></returns>
