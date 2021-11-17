@@ -8,7 +8,6 @@ namespace MathForGames
     class Car: Actor
     {
         private float _speed;
-        private float _var = 0f;
         private Vector2 _startPosition;
         private float _frequency = 5f;
         private float _offset = 0f;

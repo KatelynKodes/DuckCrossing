@@ -291,5 +291,106 @@
              - Description: Returns a bool of childFound, iterates through the _children array and childFound is set to true if the Actor in _children is equal to the child passed through the method.
              - Visibility: public
              - Arguments: child (Actor)
+    - **Filename**: Car.cs
+        - **Class Name**: Car : Actor
+            - Name: _speed (float)
+            - Description: a float variable containing the speed variable of the car.   
+            - Visibility: private
+
+            - Name: _startPosition (Vector2)
+            - Description: A vector2 variable containing the start position of the car.
+            - Visibility: private
+
+            - Name:_frequency (float)
+            - Description: A float variable containing the frequency of the cars movement 
+            - Visibility: private
+
+            - Name: _offset (float)
+            - Description: A float variable containing the offset of the car
+            - Visibility: private
+
+            - Name: _magnitude (float)
+            - Description: A float variable containing the magnitude of the car movement.
+            - Visibility: private
+
+            - Name: _val (float)
+            - Description: A float variable containing a variable that should be increased by deltaTime every time the car moves
+            - Visibility: private
+
+            - Name: Speed (float)
+            - Description: A property that returns and sets the value of _speed.
+            - Visibility: Public
+
+            - Name: Car() : base()
+            - Description: Base constructor of the Car class    
+            - Visibility: Public
+            - Arguments: x (float), y (float), speed (string), path (string)
+
+            - Name: Update()
+            - Description: Takes the LocalPosition of the car and sets it to the _startposition plus a Vector2 that has a 30 in the y position, multiplied by the Sin of the value of _val being added to by DeltaTime then multiplied by the _frequency variable added to the _offset variable. This is then multiplied by the _magnitude and _speed variables. This causes the car objects to hover in a vertical motion upwards and downwards.    
+            - Visibility: Public (override)
+            - Arguments: DeltaTime (float)
+
+            - Name: Draw()
+            - Description: Draws the car to the screen, calls the base.Draw() method and the Collider().Draw() method. 
+            - Visibility: Public (override)
+            - Arguments: none
+    - **Filename**: CircleCollider.cs
+        - **Class Name**: CircleCollider : Collider
+            - Name: _collisionRadius (float)
+            - Description: A float variable containing the collision radius of the circle collider.
+            - Visibility: private
+
+            - Name: CollisionRadius (float)
+            - Description: Gets and sets the value of the _collisionRadius variable
+            - Visibility: Public
+
+            - Name: CircleCollider() : base()
+            - Description: base constructor, setting _collisionRadius to collisionRadius
+            - Visibility: Public
+            - Arguments: collisionRadius (float), owner (Actor)
+
+            - Name: Draw()
+            - Description: calls the base Draw() method and draws circle lines to the raylib window representing the circle collider, allowing the collider to be visible on the user interface.  
+            - Visibility: Public 
+            - Arguments: none
+
+            - Name: CheckCollisionCircle()
+            - Description: Checks if the collider is colliding to another circle collider by first checking to make sure the collider passed into the method isn't it's own collider and returns true if the distance between the two circle colliders is less than or equal to the combined radii of the two circle colliders. 
+            - Visibility: Public (override)
+            - Arguments: other (CircleCollider)
+
+            - Name: CheckCollisionAABB()
+            - Description: Checks if there is a collision between a circle collider and a AABB collider by first checking if the collider passed into the method isn't itself then getting the direction from the circlecollider to the AABB collider. Then clamp the direction vector to be within the bounds of the AABB collider. The closest point is then determined by adding the direction vector to the AABB center, then uses Vector.Distance() method to track the distance from the closest point. returns true if the distance from closest point is less than or equal to the collision radius
+            - Visibility: Public (override)
+            - Arguments: other (AABBCollider)
+    - **Filename**: Collectable.cs
+        - **Class Name**: Collectable : Actor
+            - Name: _speed (float)
+            - Description: A float variabe containing the speed of the collectable.
+            - Visibility: private
+
+            - Name: _velocity (Vector2)
+            - Description: A vector2 variable containing the velocity of the collectable
+            - Visibility: private
+
+            - Name: Speed (float)
+            - Description: A property variable that gets and sets the value of the _speed variable
+            - Visibility: Public
+
+            - Name: Velocity (Vector2)
+            - Description: A property variable that gets and sets the value of the _velocity variable
+            - Visibility: Public
+
+            - Name: Update()
+            - Description: If the collectable has a parent, and that parent is a Player object, the collectable follows the player
+            - Visibility: Public (override)
+            - Arguments: deltaTime (float)
+
+            - Name: Draw()
+            - Description: Draws the collectable to the Raylib window, making it visible to the user. Calls the base and the Collider's Draw() method.
+            - Visibility: Public (override)
+            - Arguments: none
+    
 
              
