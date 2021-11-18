@@ -63,36 +63,45 @@ namespace MathForGames
             Scene LosingScene = new Scene(Color.RED);
 
             //Defining the Player
-            Player MotherDuck = new Player(400, 750, 200f, "Duck", "");
+            Player MotherDuck = new Player(400, 750, 200f, "Duck", "Images/Duck.PNG");
             MotherDuck.Collider = new AABBCollider(50, 50, MotherDuck);
+            MotherDuck.SetScale(100, 100);
 
             //Ducklings
-            Collectable Duckling1 = new Collectable(500, 500, 100f, "Duckling1", "");
+            Collectable Duckling1 = new Collectable(500, 500, 100f, "Duckling1", "Images/Chick.PNG");
             Duckling1.Collider = new CircleCollider(20, Duckling1);
+            Duckling1.SetScale(80, 80);
 
-            Collectable Duckling2 = new Collectable(94, 100, 100f, "Duckling2", "");
+            Collectable Duckling2 = new Collectable(94, 100, 100f, "Duckling2", "Images/Chick.PNG");
             Duckling2.Collider = new CircleCollider(20, Duckling2);
+            Duckling2.SetScale(80, 80);
 
-            Collectable Duckling3 = new Collectable(500, 300, 100f, "Duckling3", "");
+            Collectable Duckling3 = new Collectable(500, 300, 100f, "Duckling3", "Images/Chick.PNG");
             Duckling3.Collider = new CircleCollider(20, Duckling3);
+            Duckling3.SetScale(80, 80);
 
-            Collectable Duckling4 = new Collectable(60, 300, 100f, "Duckling4", "");
+            Collectable Duckling4 = new Collectable(60, 300, 100f, "Duckling4", "Images/Chick.PNG");
             Duckling4.Collider = new CircleCollider(20, Duckling4);
+            Duckling4.SetScale(80, 80);
 
             _maxChicks = 4;
 
             //The cars
-            Car car1 = new Car(150, 130, 5f, "car1", "");
+            Car car1 = new Car(150, 130, 5f, "car1", "Images/Car.PNG");
             car1.Collider = new AABBCollider(50, 115, car1);
+            car1.SetScale(100, 100);
 
-            Car car2 = new Car(280, 750, 5f, "car2", "");
+            Car car2 = new Car(280, 750, 5f, "car2", "Images/Car2.PNG");
             car2.Collider = new AABBCollider(50, 115, car2);
+            car2.SetScale(100, 100);
 
-            Car car3 = new Car(550, 130, 5f, "car3", "");
+            Car car3 = new Car(550, 130, 5f, "car3", "Images/Car.PNG");
             car3.Collider = new AABBCollider(50, 115, car3);
+            car3.SetScale(100, 100);
 
-            Car car4 = new Car(680, 750, 5f, "car4", "");
+            Car car4 = new Car(680, 750, 5f, "car4", "Images/Car2.PNG");
             car4.Collider = new AABBCollider(50, 115, car4);
+            car4.SetScale(100, 100);
 
             //Streets
             Actor Street1 = new Actor(100, 70, "Street1", "");

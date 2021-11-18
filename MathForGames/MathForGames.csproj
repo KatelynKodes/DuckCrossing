@@ -7,7 +7,26 @@
 
   <ItemGroup>
     <None Remove="enemy.png" />
+    <None Remove="Images\Car.PNG" />
+    <None Remove="Images\Car2.PNG" />
+    <None Remove="Images\Chick.PNG" />
+    <None Remove="Images\Duck.PNG" />
     <None Remove="player.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\Car.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Car2.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Chick.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Duck.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -16,10 +35,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MathLibrary\MathLibrary.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>

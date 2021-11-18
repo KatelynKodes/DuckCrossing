@@ -33,6 +33,7 @@ namespace MathForGames
         public override void Update(float DeltaTime)
         {
             LocalPosition = _startPosition + new Vector2(0,30) * MathF.Sin((_val += DeltaTime) * _frequency + _offset) * _magnitude * Speed;
+            base.Update(DeltaTime);
         }
 
         /// <summary>

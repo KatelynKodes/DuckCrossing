@@ -5,7 +5,10 @@ HOW TO INSTALL:
 Once you downloaded the .zip file off of Github, extract the files into a desired folder. 
 
 HOW TO RUN:
-Once your extracted files are in your desired folder, find the application titled 
+Once your extracted files are in your desired folder, find the application titled "" and double click on the application. Should run as intended.
 
 HOW TO PLAY:
 Use the WASD keys to move forward, right, left, and downward and use the SHIFT key to run. Collect chicks by running into them
+
+KNOWN ISSUES:
+Chicks will disappear when mother duck collides with them. However, the colliders still show.
