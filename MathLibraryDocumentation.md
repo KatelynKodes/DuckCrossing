@@ -2,34 +2,38 @@
 | :---          	|
 | S218002   |
 |Maths for Games|
-|   MathLibrary|
+|  Redistributable Math Classes |
 
 ## I. Requirements
 1.  **Description of Problem**
 
-        **Name**: 
+    - **Name**: Redistributable Math Classes
 
-        **Problem Statement**: 
+    - **Problem Statement**: 
 
-        **Problem Specifications**:
+        Creation of redistributable math classes that impliment Vector and Matrix classes, which can be used by other programs.
+
+    - **Problem Specifications**:
+        - Classes implement methods for, in all instances, translation, scale, magnitude, normalisation, cross product and dot product in Vector classes
+
+        - Classes implement methods for multiplication, vectors transformation, and transpose for Matricies
+
+        - Classes implement methods for setting up as rotation matrices
 
 
 2. **Input Information**
+    - This program does not need any direct input from the user, as it is primarily a library for developers to use in order to make the complex nature of Vectors and Matricies possible in their programs. However, if one were to put an Object's Matrix3 into a CreateRotation() function inside the Matrix3 class, the Matrix3 placed inside the method will be altered to create a Matrix3 that will cause the Object to appear rotated to the user on screen during testing. Many of the methods in these classes work in similar ways and there are operator overrides that allows the developer to add, subtract, multiply, and even divide Vectors and Matricies.
 
 3. **Output Information**
-
+    - Methods in the Mathlibrary will output other Matricies and Vectors if certain Methods are used, A Vector or Matrix is passed through a method and will have it's values altered. A new Vector or Matrix of the same type will then be returned with the altered values.
     
 4. **User Interface information**
-
-### Collision and Chase Behavior
-### Movement Behavior
-### Win Behavior
-### Lose Behavior
+    - Depending on the method used, the object the Matrix or Vector is connected to will appear to be rotated, translated, or scaled on the user interface. 
 
 ## II. Design
 
 1. _System architecture_
-
+    - The library is designed to be easy to use and redistributable, with heavily commented code to teach the user how to use each method. The Library is also designed to be easily restructured to suit the developers needs. The library contains two types of classes, Vectors and Matricies. It contains a Vector2, Vector3, and Vector4 classes, which controls all things regarding to vectors. There are little differences between these three classes. One of them being that Vector2's contain an X and Y value, Vector3's have an X, Y, Z classes, and Vector4's contain an X, Y, Z, and W value. Matricies work in a similar way where the Matrix4 has one extra value than Matrix3, however for Matricies they're usually portrayed in columns and rows, Matrix3's contain three columns and three rows while Matrix4's contain four columns and four rows. All of these Classes have methods that override operators so that the developer can Add, Subtract, Multiply, Divide, as well as compare Matrices with other Matricies, Vectors with other Vectors, and even Matricies with Vectors in some cases. There are also methods for all classes to Rotate, Translate, and Scale Matricies and Vectors.
 
 2. _Object Information_
 
@@ -381,9 +385,9 @@
             - Arguments: none
 
             - Name: CrossProduct()
-            - Description: Returns a vector3 containg an instance of a vector divided by the magnitude
+            - Description: Finds the cross product between two Vector3's
             - Visibility: public
-            - Arguments: none
+            - Arguments: lhs (Vector3), rhs (Vector3)
     - **FileName** Vector4.cs
         - **Class Name**: Vector4
             - Name: x (float)
@@ -458,6 +462,11 @@
             - Description: Returns a vector4 containg an instance of a vector divided by the magnitude
             - Visibility: public
             - Arguments: none
+
+            - Name: CrossProduct()
+            - Description: Finds the cross product between two Vector4's
+            - Visibility: public
+            - Arguments: lhs (Vector4), rhs (Vector4)
 
             
 

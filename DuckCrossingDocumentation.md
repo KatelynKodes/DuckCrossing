@@ -6,18 +6,17 @@
 
 ## I. Requirements
 1.  **Description of Problem**
-
-        **Name**: Graphical Test Application
-
-        **Problem Statement**: 
+    
+    - **Name**: Graphical Test Application
+    - **Problem Statement**: 
 
         Creation of a test application that makes use of my Maths classes.
-
-        **Problem Specifications**:
+        
+    - **Problem Specifications**:
         -   Impliments an example of Matrix Heirarchy to manipulate visible elements.
         -   Impliments an example of Gameobjects using velocity and acceleration with vectors
         -   Example of collision detection
-
+        
 
 2. **Input Information**
 
