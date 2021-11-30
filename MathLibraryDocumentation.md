@@ -385,7 +385,7 @@
             - Arguments: none
 
             - Name: CrossProduct()
-            - Description: Finds the cross product between two Vector3's
+            - Description: Returns a new vector3 containing X, Y and Z values. These seprate values equal the two remaining X, Y, or Z values being multiplied by one another then subtracted by the same X, Y, or Z values being multiplied in the reverse order. 
             - Visibility: public
             - Arguments: lhs (Vector3), rhs (Vector3)
     - **FileName** Vector4.cs
@@ -464,7 +464,7 @@
             - Arguments: none
 
             - Name: CrossProduct()
-            - Description: Finds the cross product between two Vector4's
+            - Description: Returns a new vector4 containing X, Y, Z and W values. These seprate values equal the two remaining X, Y, or Z values being multiplied by one another then subtracted by the same X, Y, or Z values being multiplied in the reverse order. Sets W value to 0.
             - Visibility: public
             - Arguments: lhs (Vector4), rhs (Vector4)
 
