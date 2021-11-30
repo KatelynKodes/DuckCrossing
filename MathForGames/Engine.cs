@@ -10,6 +10,7 @@ namespace MathForGames
 {
     class Engine
     {
+        //Variable
         private static bool _applicationShouldClose = false;
         private static int _currentSceneIndex = 0;
         private static Scene[] _scenes = new Scene[0];

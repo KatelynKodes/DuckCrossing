@@ -9,6 +9,15 @@ namespace MathForGames
         private Player _player;
         private UIText _counter;
 
+        /// <summary>
+        /// ScoreHolder Constructor
+        /// </summary>
+        /// <param name="x"> x position of scoreholder actor </param>
+        /// <param name="y"> y position of scoreholder actor </param>
+        /// <param name="name"> name of scoreholder actor </param>
+        /// <param name="path"> path of scoreholder actor's sprite image </param>
+        /// <param name="player"> Player variable containing the player the score is tracking </param>
+        /// <param name="counter"> UI text variable containing the text of the counter</param>
         public ScoreHolder(float x, float y, string name, string path, Player player, UIText counter) : 
             base(x,y,name,path)
         {

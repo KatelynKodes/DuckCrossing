@@ -14,11 +14,18 @@ namespace MathForGames
         private Actor[] _UIElements;
         private Color _backgroundColor;
 
+        /// <summary>
+        /// Returns the _actors variable
+        /// </summary>
         public Actor[] Actors
         {
             get { return _actors; }
         }
 
+        /// <summary>
+        /// Base constructor 
+        /// </summary>
+        /// <param name="backgroundColor"> Color of the background in the scene </param>
         public Scene(Color backgroundColor)
         {
             _actors = new Actor[0];

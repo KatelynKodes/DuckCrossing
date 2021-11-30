@@ -4,6 +4,9 @@ using System.Text;
 
 namespace MathForGames
 {
+    /// <summary>
+    /// An enum containing the types of collider
+    /// </summary>
     enum ColliderType
     {
         CIRCLE,
@@ -11,15 +14,22 @@ namespace MathForGames
     }
     abstract class Collider
     {
+        // Variables
         private Actor _owner;
         private ColliderType _colliderType;
 
+        /// <summary>
+        /// Returns and sets the _owner actor value
+        /// </summary>
         public Actor Owner
         {
             get { return _owner; }
             set { _owner = value; }
         }
 
+        /// <summary>
+        /// returns the _colliderType enum value.
+        /// </summary>
         public ColliderType ColliderType
         {
             get { return _colliderType; }
@@ -53,8 +63,18 @@ namespace MathForGames
             return false;
         }
 
+        /// <summary>
+        /// Checks collision with a CircleCollider, returns false at default
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public virtual bool CheckCollisionCircle(CircleCollider other) { return false; }
 
+        /// <summary>
+        /// Checks collision with an AABB collider, returns false at default
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public virtual bool CheckCollisionAABB(AABBCollider other) { return false;}
     }
 }

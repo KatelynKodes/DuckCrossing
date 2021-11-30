@@ -28,8 +28,10 @@ namespace MathForGames
             private set { _texture.height = value; }
         }
 
-
-        /// <param name="path"> The path the texture is located in</param>
+        /// <summary>
+        /// Base constructor 
+        /// </summary>
+        /// <param name="path"> The path the texture is located in </param>
         public Sprite(string path)
         {
             _texture = Raylib.LoadTexture(path);

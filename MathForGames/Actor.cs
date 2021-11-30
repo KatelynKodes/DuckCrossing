@@ -25,17 +25,28 @@ namespace MathForGames
         private Actor[] _children = new Actor[0];
         private Actor _parent;
 
+        /// <summary>
+        /// Returns the value of the _started boolean
+        /// </summary>
         public bool Started
         {
             get { return _started; }
         }
 
+        /// <summary>
+        /// Returns and gives the ability to set 
+        /// a vector2 showing the position of the actor related to other actors.
+        /// </summary>
         public Vector2 LocalPosition
         {
             get { return new Vector2(_translate.M02, _translate.M12); }
             set{ SetTranslation(value.X, value.Y);}
         }
 
+        /// <summary>
+        /// Returns and gives the ability to set a vector2 showing the position of the actor related to 
+        /// the world.
+        /// </summary>
         public Vector2 WorldPosition
         {
             get { return new Vector2(_globalTransform.M02, _globalTransform.M12); }
@@ -54,29 +65,44 @@ namespace MathForGames
             }
         }
 
+        /// <summary>
+        /// Returns and sets the value for the _localtransform variable
+        /// </summary>
         public Matrix3 LocalTransform
         {
             get { return _localTransform; }
             private set { _localTransform = value; }
         }
 
+        /// <summary>
+        /// Returns and sets the value for the _globalTransform variable
+        /// </summary>
         public Matrix3 GlobalTransform
         {
             get { return _globalTransform; }
             private set { _globalTransform = value; }
         }
 
+        /// <summary>
+        /// Returns and sets the value of the _parent variable
+        /// </summary>
         public Actor Parent
         {
             get { return _parent; }
             set { _parent = value; }
         }
 
+        /// <summary>
+        /// Returns and sets the value of the _Children array
+        /// </summary>
         public Actor[] Children
         {
             get { return _children; }
         }
 
+        /// <summary>
+        /// Returns a vector2 with the xScale and yScale of the actor
+        /// </summary>
         public Vector2 Size
         {
             get 
@@ -89,23 +115,36 @@ namespace MathForGames
             set { SetScale(value.X, value.Y); }
         }
 
+        /// <summary>
+        /// Returns and sets the value of the _sprite variable
+        /// </summary>
         public Sprite Sprite
         {
             get { return _sprite; }
             set { _sprite = value; }
         }
 
+        /// <summary>
+        /// Returns and sets the value of the _name variable
+        /// </summary>
         public string Name
         {
             get { return _name; }
         }
 
+        /// <summary>
+        /// Returns and sets the value of the _collider variable
+        /// </summary>
         public Collider Collider
         {
             get { return _collider; }
             set { _collider = value; }
         }
 
+        /// <summary>
+        /// Returns a vector2 of the rotation.M00 and rotation.M10 of the actor
+        /// Creates a vector2 of a set value normalized plus the localposition, then passes it through the LookAt function
+        /// </summary>
         public Vector2 Forward
         {
             get { return new Vector2(_rotation.M00, _rotation.M10); }
@@ -117,10 +156,22 @@ namespace MathForGames
             }
         }
 
+        /// <summary>
+        /// Simplified constructor
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="name"></param>
+        /// <param name="path"></param>
         public Actor(float x, float y, string name = "Actor", string path = "") :
             this(new Vector2 {X = x, Y = y}, name, path){ }
 
-
+        /// <summary>
+        /// Base constructor
+        /// </summary>
+        /// <param name="position"> The position of the Actor on screen </param>
+        /// <param name="name"> Name of the actor </param>
+        /// <param name="path"> Path of the actor sprite image </param>
         public Actor(Vector2 position, string name = "Actor", string path = "")
         {
             LocalPosition = position;
@@ -132,16 +183,26 @@ namespace MathForGames
             }
         }
 
+        /// <summary>
+        /// Sets the _started bool to true;
+        /// </summary>
         public virtual void Start()
         {
             _started = true;
         }
 
+        /// <summary>
+        /// Updates the transforms of the actors in regards to where they are on screen
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public virtual void Update(float deltaTime)
         {
             UpdateTransforms();
         }
 
+        /// <summary>
+        /// Draws the actors sprite on the screen
+        /// </summary>
         public virtual void Draw()
         {
             if (_sprite != null)
@@ -243,6 +304,10 @@ namespace MathForGames
             return Collider.CheckCollider(other);   
         }
 
+        /// <summary>
+        /// Action preformed when an actor collides with another Actor
+        /// </summary>
+        /// <param name="actor"> Actor the object collides with</param>
         public virtual void OnCollision(Actor actor)
         {
         }

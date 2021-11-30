@@ -4,9 +4,15 @@ namespace MathLibrary
 {
     public struct Vector2
     {
+        // Variable
         public float X;
         public float Y;
 
+        /// <summary>
+        /// Vetor2 Base constructor
+        /// </summary>
+        /// <param name="xValue"></param>
+        /// <param name="yValue"></param>
         public Vector2(float xValue, float yValue)
         {
             X = xValue;
@@ -14,7 +20,7 @@ namespace MathLibrary
         }
 
         /// <summary>
-        /// Gets the length of the vector 
+        /// Returns the length of the vector by returning X * X + Y * Y
         /// </summary>
         public float Magnitude
         {
@@ -24,6 +30,10 @@ namespace MathLibrary
             }
         }
 
+        /// <summary>
+        /// Creates a new vector2 of this vector2, then makes that new Vector2 value
+        /// call the Normalize method and returns the Vector2 value of the Normalized method called.
+        /// </summary>
         public Vector2 Normalized
         {
             get

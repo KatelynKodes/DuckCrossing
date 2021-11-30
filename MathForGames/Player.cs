@@ -8,36 +8,57 @@ namespace MathForGames
 {
     class Player : Actor
     {
+        // Variables 
         private Vector2 _velocity;
         private float _speed;
         private float _defaultSpeed;
         private bool _isDead;
         private int _currChildren;
 
+        /// <summary>
+        /// Returns and sets the _isDead variable
+        /// </summary>
         public bool IsDead
         {
             get { return _isDead; }
             private set { _isDead = value; }
         }
 
+        /// <summary>
+        /// Returns and privately sets the _currChildren variable
+        /// </summary>
         public int CurrChildren
         {
             get { return _currChildren; }
             private set { _currChildren = value; }
         }
 
+        /// <summary>
+        /// Returns and sets the _speed variable
+        /// </summary>
         public float Speed
         {
             get { return _speed; }
             set { _speed = value; }
         }
 
+        /// <summary>
+        /// Returns and sets the _velocity variable
+        /// </summary>
         public Vector2 Velocity
         {
             get { return _velocity; }
             set { _velocity = value; }
         }
 
+        /// <summary>
+        /// Base Player constructor
+        /// </summary>
+        /// <param name="x"> x position of the player actor </param>
+        /// <param name="y"> y position of the player actor </param>
+        /// <param name="speed"> speed variable of the player actor </param>
+        /// <param name="name"> name variable of the player actor </param>
+        /// <param name="path"> path to the player actor's sprite image </param>
         public Player(float x, float y, float speed, string name = "Actor", string path = "") :
             base(x, y, name, path)
         {
@@ -94,6 +115,9 @@ namespace MathForGames
             }
         }
 
+        /// <summary>
+        /// Calls the base draw method and the collider draw method
+        /// </summary>
         public override void Draw()
         {
             base.Draw();

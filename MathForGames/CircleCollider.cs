@@ -8,8 +8,12 @@ namespace MathForGames
 {
     class CircleCollider: Collider
     {
+        //Variables
         private float _collisionRadius;
 
+        /// <summary>
+        /// Returns and sets the variable of the _collisionradius variable
+        /// </summary>
         public float CollisionRadius
         {
             get { return _collisionRadius; }
@@ -17,11 +21,19 @@ namespace MathForGames
 
         }
 
+        /// <summary>
+        /// Base constructor
+        /// </summary>
+        /// <param name="collisionRadius"> The collisionradius of the circlecollider </param>
+        /// <param name="owner"> Owner of the circleCollider </param>
         public CircleCollider(float collisionRadius, Actor owner) : base(owner, ColliderType.CIRCLE)
         {
             _collisionRadius = collisionRadius;
         }
 
+        /// <summary>
+        /// Draws circle lines on the Raylib window where the circle collider should be
+        /// </summary>
         public override void Draw()
         {
             base.Draw();

@@ -8,6 +8,12 @@ namespace MathLibrary
     {
         public float M00, M01, M02, M10, M11, M12, M20, M21, M22;
 
+        /// <summary>
+        /// Base constructor of the Matrix3
+        /// </summary>
+        /// <param name="m00"> x-Xvalue </param> <param name="m01"> x-Yvalue </param> <param name="m02"> x-Zvalue </param>
+        /// <param name="m10"> y-Xvalue </param> <param name="m11"> y-Yvalue </param> <param name="m12"> y-Zvalue </param>
+        /// <param name="m20"> z-Xvalue </param> <param name="m21"> z-Yvalue </param> <param name="m22"> z-Zvalue</param>
         public Matrix3(float m00, float m01, float m02, //x-axis
                        float m10, float m11, float m12, //y-axis
                        float m20, float m21, float m22) //z-axis
@@ -24,6 +30,10 @@ namespace MathLibrary
 
         }
 
+        /// <summary>
+        /// Returns a Matrix3 with the M00, M11, and M22, values set to 1
+        /// and the other values set to 0
+        /// </summary>
         public static Matrix3 Identity
         {
             get 
@@ -34,6 +44,12 @@ namespace MathLibrary
             }
         }
 
+        /// <summary>
+        /// Returns a new Matrix3 that contains values of one Matrix3 added to another
+        /// </summary>
+        /// <param name="lhs"> The left hand side of the equation </param>
+        /// <param name="rhs"> The right hand side of the equation </param>
+        /// <returns></returns>
         public static Matrix3 operator +(Matrix3 lhs, Matrix3 rhs)
         {
             //Add the rhs values to the lhs values and create new floats to contain these values
@@ -56,6 +72,12 @@ namespace MathLibrary
             return AddedMatrix;
         }
 
+        /// <summary>
+        /// Returns a new Matrix3 that contains values of one Matrix3 subtracted from another
+        /// </summary>
+        /// <param name="lhs"> The left hand side of the equation </param>
+        /// <param name="rhs"> The right hand side of the equation </param>
+        /// <returns></returns>
         public static Matrix3 operator -(Matrix3 lhs, Matrix3 rhs)
         {
             //Subtract the rhs variables from the lhs variables and place them into new float variables
@@ -78,6 +100,13 @@ namespace MathLibrary
             return SubtractedMatrix;
         }
 
+        /// <summary>
+        /// An operator overload that returns a new Matrix3 after multiplying one matrix3 to the other
+        /// containing the multiplied values. 
+        /// </summary>
+        /// <param name="lhs"> The left hand side of the equation </param>
+        /// <param name="rhs"> The right hand side of the equation </param>
+        /// <returns></returns>
         public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)
         {
             //Row 1

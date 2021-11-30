@@ -7,21 +7,36 @@ namespace MathForGames
 {
     class Collectable : Actor
     {
+        // Variables
         private float _speed;
         private Vector2 _velocity;
 
+        /// <summary>
+        /// Returns and sets the value of the _speed variable
+        /// </summary>
         public float Speed
         {
             get { return _speed; }
             set { _speed = value; }
         }
 
+        /// <summary>
+        /// Returns and sets the value of the _velocity variable
+        /// </summary>
         public Vector2 Velocity
         {
             get { return _velocity; }
             set { _velocity = value; }
         }
 
+        /// <summary>
+        /// Base constructor
+        /// </summary>
+        /// <param name="x"> x position of the collectable actor </param>
+        /// <param name="y"> y position of the collectable actor </param>
+        /// <param name="speed"> speed of the collectable actor </param>
+        /// <param name="name"> Name of the collectable actor </param>
+        /// <param name="path"> path of the collectable actor's sprite image </param>
         public Collectable(float x, float y, float speed, string name = "Actor", string path = "") : base(x, y, name, path)
         {
             _speed = speed;
